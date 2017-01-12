@@ -25,7 +25,8 @@ class TestCoordinate(TestCase):
         cls.valid_one_based_multideletion = Coordinate('7', '140534448',
                                                        '140534450', 'AGG', '-')
         cls.valid_zero_based_multideletion = Coordinate('7', '140534447',
-                                                        '140534450', 'AGG', '-')
+                                                        '140534450',
+                                                        'AGG', '-')
 
     def test_coordinate_initialization(self):
         self._assert_valid_coordinate_match(self.valid_one_based_snv, '7',
@@ -70,7 +71,7 @@ class TestCoordinate(TestCase):
                           'AG', 'T')
         self.assertRaises(ValueError, Coordinate, '7', 140534448, 140534448,
                           'AG', '-')
-        self.assertRaises(ValueError, Coordinate, '7', 140534447, 140534448,
+        self.assertRaises(ValueError, Coordinate, '7', 140534447, 140534450,
                           'AG', '-')
 
     def test_to_zero_based(self):

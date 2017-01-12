@@ -1,4 +1,4 @@
-class Coordinate():
+class Coordinate:
     """Coordinate validates coordinate data and converts coordinate systems.
 
     Chromosome, start, stop, reference and variant values are validated to
@@ -12,11 +12,9 @@ class Coordinate():
         stop (int): Ending coordinate.
         ref (str): Genome reference base.
         var (str): Variant base.
-        zero_one_based (1 or 0): 1 if coordinate is one-based, 0 if zero-based.
-        is_valid (bool): True if coordinate is valid one-based or zero-based
-            coordinate system, False otherwise.
-        is_insertion (bool): True is coordinate is an insertion.
-        is_snv (bool): True if coordinate is single nucleotide variant.
+        coordinate_system (1 or 0): 1 if coordinate is one-based, 0 if
+            zero-based.
+        mutation_type ('snv', 'ins', 'del', 'sub'): Specifies mutation type.
     """
 
     def __init__(self, chromosome, start, stop, ref, var):
