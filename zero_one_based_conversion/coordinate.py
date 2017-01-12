@@ -24,8 +24,8 @@ class Coordinate():
 
         Args:
             chromosome (str): Chromosome name.
-            start (int): Starting coordinate.
-            stop (int): Ending coordinate.
+            start (str): Starting coordinate.
+            stop (str): Ending coordinate.
             ref (str): Genome reference base.
             var (str): Variant base.
         """
@@ -35,8 +35,8 @@ class Coordinate():
     def _set_coordinate(self, chromosome, start, stop, ref, var):
         """"""
         self.chromosome = chromosome
-        self.start = start
-        self.stop = stop
+        self.start = int(start)
+        self.stop = int(stop)
         self.ref = ref
         self.var = var
         self._determine_mutation_type()
@@ -101,7 +101,24 @@ class Coordinate():
                 system. Values are positionally formatted as chromosome, start,
                 stop, reference, variant.
         """
-        return ''
+        if self.coordinate_system == 0:
+            zero_based = '\t'.join([self.chromosome, str(self.start),
+                                    str(self.stop), self.ref, self.var])
+        elif self.coordinate_system == 1:
+            if self.mutation_type is 'snv':
+                zero_based = '\t'.join([self.chromosome, str(self.start-1),
+                                        str(self.stop), self.ref, self.var])
+            elif self.mutation_type is 'ins':
+                zero_based = '\t'.join([self.chromosome, str(self.start),
+                                        str(self.stop-1), self.ref, self.var])
+            elif self.mutation_type in ['del', 'sub']:
+                zero_based = '\t'.join([self.chromosome, str(self.start - 1),
+                                        str(self.stop), self.ref, self.var])
+            else:
+                raise TypeError("Coordinate is not valid mutation type")
+        else:
+            raise TypeError("Coordinate is not valid mutation type")
+        return zero_based
 
     def to_one_based(self):
         """Converts coordinate to one-based and returns a tab-delimited string.
@@ -111,7 +128,24 @@ class Coordinate():
                 Values are positionally formatted as chromosome, start, stop,
                 reference, variant.
         """
-        return ''
+        if self.coordinate_system == 1:
+            one_based = '\t'.join([self.chromosome, str(self.start),
+                                   str(self.stop), self.ref, self.var])
+        elif self.coordinate_system == 0:
+            if self.mutation_type is 'snv':
+                one_based = '\t'.join([self.chromosome, str(self.start+1),
+                                       str(self.stop), self.ref, self.var])
+            elif self.mutation_type is 'ins':
+                one_based = '\t'.join([self.chromosome, str(self.start),
+                                       str(self.stop+1), self.ref, self.var])
+            elif self.mutation_type in ['del', 'sub']:
+                one_based = '\t'.join([self.chromosome, str(self.start + 1),
+                                       str(self.stop), self.ref, self.var])
+            else:
+                raise TypeError("Coordinate is not valid mutation type")
+        else:
+            raise TypeError("Coordinate is not valid mutation type")
+        return one_based
 
     def is_valid(self):
         return self._valid_coord

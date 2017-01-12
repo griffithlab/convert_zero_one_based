@@ -6,26 +6,26 @@ from zero_one_based_conversion.coordinate import Coordinate
 class TestCoordinate(TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.valid_one_based_snv = Coordinate('7', 140534448, 140534448,
+        cls.valid_one_based_snv = Coordinate('7', '140534448', '140534448',
                                              'A', 'T')
-        cls.valid_zero_based_snv = Coordinate('7', 140534447, 140534448,
+        cls.valid_zero_based_snv = Coordinate('7', '140534447', '140534448',
                                               'A', 'T')
-        cls.valid_one_based_sub = Coordinate('7', 140534448, 140534450,
+        cls.valid_one_based_sub = Coordinate('7', '140534448', '140534450',
                                              'AGG', 'CAT')
-        cls.valid_zero_based_sub = Coordinate('7', 140534447, 140534450,
+        cls.valid_zero_based_sub = Coordinate('7', '140534447', '140534450',
                                               'AGG', 'CAT')
-        cls.valid_one_based_insertion = Coordinate('7', 140534447, 140534448,
-                                                   '-', 'TTA')
-        cls.valid_zero_based_insertion = Coordinate('7', 140534447, 140534447,
-                                                    '-', 'TTA')
-        cls.valid_one_based_deletion = Coordinate('7', 140534448, 140534448,
-                                                  'A', '-')
-        cls.valid_zero_based_deletion = Coordinate('7', 140534447, 140534448,
-                                                   'A', '-')
-        cls.valid_one_based_multideletion = Coordinate('7', 140534448,
-                                                       140534450, 'AGG', '-')
-        cls.valid_zero_based_multideletion = Coordinate('7', 140534447,
-                                                        140534450, 'AGG', '-')
+        cls.valid_one_based_insertion = Coordinate('7', '140534447',
+                                                   '140534448', '-', 'TTA')
+        cls.valid_zero_based_insertion = Coordinate('7', '140534447',
+                                                    '140534447', '-', 'TTA')
+        cls.valid_one_based_deletion = Coordinate('7', '140534448',
+                                                  '140534448', 'A', '-')
+        cls.valid_zero_based_deletion = Coordinate('7', '140534447',
+                                                   '140534448', 'A', '-')
+        cls.valid_one_based_multideletion = Coordinate('7', '140534448',
+                                                       '140534450', 'AGG', '-')
+        cls.valid_zero_based_multideletion = Coordinate('7', '140534447',
+                                                        '140534450', 'AGG', '-')
 
     def test_coordinate_initialization(self):
         self._assert_valid_coordinate_match(self.valid_one_based_snv, '7',
@@ -58,24 +58,24 @@ class TestCoordinate(TestCase):
         self._assert_valid_coordinate_match(
             self.valid_zero_based_multideletion, '7', 140534447, 140534450,
             'AGG', '-', 0, 'del')
-        self.assertRaises(ValueError, Coordinate('7', 140534448,
-                                                 140, 'A', 'T'))
-        self.assertRaises(ValueError, Coordinate('7', 140534448,
-                                                 140, '-', 'T'))
-        self.assertRaises(ValueError, Coordinate('7', 140534448,
-                                                 140, 'A', '-'))
-        self.assertRaises(ValueError, Coordinate('7', 140534448, 140534448,
-                                                 'AG', 'T'))
-        self.assertRaises(ValueError, Coordinate('7', 140534447, 140534448,
-                                                 'AG', 'T'))
-        self.assertRaises(ValueError, Coordinate('7', 140534448, 140534448,
-                                                 'AG', '-'))
-        self.assertRaises(ValueError, Coordinate('7', 140534447, 140534448,
-                                                 'AG', '-'))
+        self.assertRaises(ValueError, Coordinate, '7', 140534448,
+                          140, 'A', 'T')
+        self.assertRaises(ValueError, Coordinate, '7', 140534448,
+                          140, '-', 'T')
+        self.assertRaises(ValueError, Coordinate, '7', 140534448,
+                          140, 'A', '-')
+        self.assertRaises(ValueError, Coordinate, '7', 140534448, 140534448,
+                          'AG', 'T')
+        self.assertRaises(ValueError, Coordinate, '7', 140534447, 140534448,
+                          'AG', 'T')
+        self.assertRaises(ValueError, Coordinate, '7', 140534448, 140534448,
+                          'AG', '-')
+        self.assertRaises(ValueError, Coordinate, '7', 140534447, 140534448,
+                          'AG', '-')
 
     def test_to_zero_based(self):
         self.assertEquals(self.valid_one_based_snv.to_zero_based(),
-                          '\t'.join(['12', '140534447',
+                          '\t'.join(['7', '140534447',
                                      '140534448', 'A', 'T']))
         self.assertEquals(self.valid_zero_based_snv.to_zero_based(),
                           '\t'.join(['7', '140534447',
@@ -103,7 +103,7 @@ class TestCoordinate(TestCase):
 
     def test_to_one_based(self):
         self.assertEquals(self.valid_one_based_snv.to_one_based(),
-                          '\t'.join(['12', '140534448',
+                          '\t'.join(['7', '140534448',
                                      '140534448', 'A', 'T']))
         self.assertEquals(self.valid_zero_based_snv.to_one_based(),
                           '\t'.join(['7', '140534448',
