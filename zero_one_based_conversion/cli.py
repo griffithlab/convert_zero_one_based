@@ -42,10 +42,11 @@ def main(to_base, header, input_file, output_file):
         output_file.write(input_file.readline())
 
     if to_base is 'one':
-        converted = convert.convert(input_file)
-        click.echo(converted)
+        output_file.write(convert.coordinate_system(input_file, 'to_one_based'))
+        # click.echo(converted)
     else:
-        click.echo(input_file)
+        output_file.write(convert.coordinate_system(input_file, 'to_zero_based'))
+        # click.echo(input_file)
 
 
 if __name__ == '__main__':
