@@ -1,0 +1,38 @@
+package:
+  name: convert_zero_one_based
+  version: "0.0.1"
+
+source:
+  path: .
+
+build:
+  script:
+    - flake8 . -v --config=.flake8rc
+    - nosetests --verbose
+    - python setup.py install
+  entry_points:
+    - convert_zero_one_based = zero_one_based_conversion.cli:main
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - nose
+    - flake8
+    - click
+  run:
+    - python
+    - click
+
+test:
+  imports:
+    - zero_one_based_conversion
+  commands:
+    - convert_zero_one_based -v
+    - convert_zero_one_based --version
+    - convert_zero_one_based -h
+    - convert_zero_one_based --help
+
+about:
+  home: https://github.com/bainscou/convert_zero_one_based
+  license: MIT
