@@ -43,6 +43,7 @@ class Coordinate:
     def _determine_mutation_type(self):
         """Determines the mutation type from start, stop, ref, var"""
 
+        print("in mutation type")
         if self.ref in ['-', '.', '0']:
             self.mutation_type = 'ins'
         elif self.var in ['-', '.', '0']:
@@ -115,7 +116,7 @@ class Coordinate:
             else:
                 raise TypeError("Coordinate is not valid mutation type")
         else:
-            raise TypeError("Coordinate is not valid mutation type")
+            raise TypeError("Coordinate is not valid coordinate system")
         return zero_based
 
     def to_one_based(self):

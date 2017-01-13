@@ -41,11 +41,15 @@ def main(to_base, header, input_file, output_file):
     if header:
         output_file.write(input_file.readline())
 
-    if to_base is 'one':
-        output_file.write(convert.coordinate_system(input_file, 'to_one_based'))
+    if to_base == 'one':
+        output_file.write(convert.coordinate_system(input_file.read(),
+                                                    'to_one_based'))
         # click.echo(converted)
+    elif to_base == 'zero':
+        output_file.write(convert.coordinate_system(input_file.read(),
+                                                    'to_zero_based'))
     else:
-        output_file.write(convert.coordinate_system(input_file, 'to_zero_based'))
+        raise RuntimeError('Invalid to-base parameter')
         # click.echo(input_file)
 
 
