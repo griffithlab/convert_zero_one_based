@@ -11,10 +11,13 @@ Python CLI to convert between zero and one based coordinate systems
 1. Clone this repo
 
 		git clone https://github.com/griffithlab/convert_zero_one_based.git
-2. Use Anaconda to build the tool
+2. Add conda-forge channel to build dependencies
+
+		conda config --add channels conda-forge 
+3. Use Anaconda to build the tool
 
 		conda build .
-3. Copy the filepath of the built package from the `conda build .` command. `/Users/<YOUR_USERNAME>/anaconda/conda-bld/osx-64/convert_zero_one_based-0.0.1-py35_0.tar.bz2` in the example below.
+4. Copy the filepath of the built package from the `conda build .` command. `/Users/<YOUR_USERNAME>/anaconda/conda-bld/osx-64/convert_zero_one_based-0.0.1-py35_0.tar.bz2` in the example below.
 
 		# If you want to upload this package to anaconda.org later, type:
 		#
@@ -22,10 +25,10 @@ Python CLI to convert between zero and one based coordinate systems
 		#
 		# To have conda build upload to anaconda.org automatically, use
 		# $ conda config --set anaconda_upload yes
-4. Install the tool locally
+5. Install the tool locally
 
 		conda install /Users/<YOUR_USERNAME>/anaconda/conda-bld/osx-64/convert_zero_one_based-0.0.1-py35_0.tar.bz2
 		
-5. Verify the install
+6. Verify the install
 
 		convert_zero_one_based --help
