@@ -54,6 +54,9 @@ class TestConvert(TestCase):
 7	A	14053450	AAG	CAT
 -	14053447	14053448	-	TTA
 7	14053448	14053448	A	-'''
+        misformated_coords_zero = '''1	880974	880975	T	G
+1	2443097	2443098	A	T
+7	14053447	14053448	A	-'''
         one_to_zero = convert.coordinate_system(one_based, 'to_zero_based')
         self.assertMultiLineEqual(one_to_zero, zero_based)
         one_to_zero_extra_cols = convert.coordinate_system(
@@ -69,5 +72,6 @@ class TestConvert(TestCase):
         one_based_empty_lines_to_zero = convert.coordinate_system(
             one_based_empty_lines, 'to_zero_based')
         self.assertMultiLineEqual(one_based_empty_lines_to_zero, zero_based)
-        self.assertRaises(ValueError, convert.coordinate_system,
-                          misformated_coords_string, 'to_zero_based')
+        misformated_coords = convert\
+            .coordinate_system(misformated_coords_string, 'to_zero_based')
+        self.assertMultiLineEqual(misformated_coords, misformated_coords_zero)

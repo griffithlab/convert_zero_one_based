@@ -91,8 +91,9 @@ class Coordinate:
                                  'variant fields indicate an deletion or '
                                  'substitution variant, however the '
                                  'coordinates ({1} and {2}) are not valid for '
-                                 'these mutation types.'.format(
-                    self.to_string(), self.start, self.stop))
+                                 'these mutation types.'
+                                 .format(self.to_string(),
+                                         self.start, self.stop))
 
     def to_zero_based(self):
         """Converts coordinate to zero-based and returns a tab-delimited string.
@@ -111,7 +112,8 @@ class Coordinate:
                                         str(self.stop), self.ref, self.var])
             elif self.mutation_type is 'ins':
                 zero_based = '\t'.join([self.chromosome, str(self.start),
-                                        str(self.stop - 1), self.ref, self.var])
+                                        str(self.stop - 1),
+                                        self.ref, self.var])
             elif self.mutation_type in ['del', 'sub']:
                 zero_based = '\t'.join([self.chromosome, str(self.start - 1),
                                         str(self.stop), self.ref, self.var])

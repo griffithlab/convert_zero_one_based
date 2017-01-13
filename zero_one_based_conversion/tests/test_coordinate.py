@@ -138,7 +138,6 @@ class TestCoordinate(TestCase):
         self.assertEquals(coordinate.stop, stop)
         self.assertEquals(coordinate.ref, ref)
         self.assertEquals(coordinate.var, var)
-        self.assertTrue(coordinate.is_valid())
         self.assertEquals(coordinate.coordinate_system, coordinate_system)
         self.assertEquals(coordinate.mutation_type, mutation_type)
 
@@ -150,6 +149,5 @@ class TestCoordinate(TestCase):
         self.assertEquals(coordinate.stop, stop)
         self.assertEquals(coordinate.ref, ref)
         self.assertEquals(coordinate.var, var)
-        self.assertFalse(coordinate.is_valid())
         self.assertEquals(coordinate.coordinate_system, coordinate_system)
         self.assertEquals(coordinate.mutation_type, mutation_type)

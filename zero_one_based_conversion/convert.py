@@ -36,13 +36,13 @@ def coordinate_system(input_string, convert_to_coordinate_system):
                 del coord[5:]
 
             if convert_to_coordinate_system is 'to_zero_based':
-                out = '\t'.join([Coordinate(coord[0], coord[1], coord[2], coord[3],
-                                            coord[4]).to_zero_based()] +
-                                extra_cols)
+                out = '\t'.join([Coordinate(coord[0], coord[1], coord[2],
+                                            coord[3], coord[4])
+                                .to_zero_based()] + extra_cols)
             elif convert_to_coordinate_system is 'to_one_based':
-                out = '\t'.join([Coordinate(coord[0], coord[1], coord[2], coord[3],
-                                            coord[4]).to_one_based()] +
-                                extra_cols)
+                out = '\t'.join([Coordinate(coord[0], coord[1], coord[2],
+                                            coord[3], coord[4])
+                                .to_one_based()] + extra_cols)
         except ValueError as error:
             print('Coordinate Error in line {0} or input. Coordinate skipped.'
                   '\n\tMessage: {1}'.format(line_number, error))
