@@ -27,7 +27,6 @@ class Coordinate:
             ref (str): Genome reference base.
             var (str): Variant base.
         """
-        self._valid_coord = True
         self._set_coordinate(chromosome, start, stop, ref, var)
 
     def _set_coordinate(self, chromosome, start, stop, ref, var):
@@ -42,8 +41,6 @@ class Coordinate:
 
     def _determine_mutation_type(self):
         """Determines the mutation type from start, stop, ref, var"""
-
-        print("in mutation type")
         if self.ref in ['-', '.', '0']:
             self.mutation_type = 'ins'
         elif self.var in ['-', '.', '0']:
@@ -53,44 +50,49 @@ class Coordinate:
         elif len(self.ref) == len(self.var) and len(self.ref) > 1:
             self.mutation_type = 'sub'
         else:
-            raise ValueError('The coordinate inputs do not resolve to a valid '
-                             'variant type (snv, ins, del, sub).')
+            raise ValueError('The coordinate, {0} inputs do not resolve to a '
+                             'valid variant type (snv, ins, '
+                             'del, sub).'.format(self.to_string()))
 
     def _determine_coordinate_system(self):
         """Determines the coordinate system using the coordinates and inferred
         mutation type."""
-        if not self._valid_coord:
-            pass
         if self.mutation_type is 'snv':
-            if self.start+1 == self.stop:
+            if self.start + 1 == self.stop:
                 self.coordinate_system = 0
             elif self.start == self.stop:
                 self.coordinate_system = 1
             else:
                 raise ValueError('The reference and variant fields indicate a '
                                  'single nucleotide variant, however the '
-                                 'coordinates (start and stop) are not valid '
-                                 'for this mutation type')
+                                 'coordinates ({0} and {1}) are not valid '
+                                 'for this mutation type. Coordinate: '
+                                 '{2}'.format(self.start, self.stop,
+                                              self.to_string()))
         elif self.mutation_type is 'ins':
             if self.start == self.stop:
                 self.coordinate_system = 0
-            elif self.start == self.stop-1:
+            elif self.start == self.stop - 1:
                 self.coordinate_system = 1
             else:
-                raise ValueError('The reference and variant fields indicate '
-                                 'an insertion variant, however the '
-                                 'coordinates (start and stop) are not valid '
-                                 'for this mutation type.')
+                raise ValueError('For the coordinate {0}, the reference and '
+                                 'variant fields indicate an insertion '
+                                 'variant, however the coordinates ({1} and '
+                                 '{2}) are not valid for these mutation '
+                                 'types.'.format(self.to_string(),
+                                                 self.start, self.stop))
         elif self.mutation_type in ['del', 'sub']:
             if self.start + len(self.ref) == self.stop:
                 self.coordinate_system = 0
-            elif self.stop - self.start == len(self.ref)-1:
+            elif self.stop - self.start == len(self.ref) - 1:
                 self.coordinate_system = 1
             else:
-                raise ValueError('The reference and variant fields indicate '
-                                 'an deletion or substitution variant, '
-                                 'however the coordinates (start and stop) '
-                                 'are not valid for these mutation types.')
+                raise ValueError('For the coordinate {0}, the reference and '
+                                 'variant fields indicate an deletion or '
+                                 'substitution variant, however the '
+                                 'coordinates ({1} and {2}) are not valid for '
+                                 'these mutation types.'.format(
+                    self.to_string(), self.start, self.stop))
 
     def to_zero_based(self):
         """Converts coordinate to zero-based and returns a tab-delimited string.
@@ -105,18 +107,20 @@ class Coordinate:
                                     str(self.stop), self.ref, self.var])
         elif self.coordinate_system == 1:
             if self.mutation_type is 'snv':
-                zero_based = '\t'.join([self.chromosome, str(self.start-1),
+                zero_based = '\t'.join([self.chromosome, str(self.start - 1),
                                         str(self.stop), self.ref, self.var])
             elif self.mutation_type is 'ins':
                 zero_based = '\t'.join([self.chromosome, str(self.start),
-                                        str(self.stop-1), self.ref, self.var])
+                                        str(self.stop - 1), self.ref, self.var])
             elif self.mutation_type in ['del', 'sub']:
                 zero_based = '\t'.join([self.chromosome, str(self.start - 1),
                                         str(self.stop), self.ref, self.var])
             else:
-                raise TypeError("Coordinate is not valid mutation type")
+                raise ValueError("Coordinate, {0}, is not valid mutation "
+                                 "type".format(self.to_string()))
         else:
-            raise TypeError("Coordinate is not valid coordinate system")
+            raise ValueError("Coordinate, {0}, is not valid coordinate "
+                             "system".format(self.to_string()))
         return zero_based
 
     def to_one_based(self):
@@ -132,19 +136,22 @@ class Coordinate:
                                    str(self.stop), self.ref, self.var])
         elif self.coordinate_system == 0:
             if self.mutation_type is 'snv':
-                one_based = '\t'.join([self.chromosome, str(self.start+1),
+                one_based = '\t'.join([self.chromosome, str(self.start + 1),
                                        str(self.stop), self.ref, self.var])
             elif self.mutation_type is 'ins':
                 one_based = '\t'.join([self.chromosome, str(self.start),
-                                       str(self.stop+1), self.ref, self.var])
+                                       str(self.stop + 1), self.ref, self.var])
             elif self.mutation_type in ['del', 'sub']:
                 one_based = '\t'.join([self.chromosome, str(self.start + 1),
                                        str(self.stop), self.ref, self.var])
             else:
-                raise TypeError("Coordinate is not valid mutation type")
+                raise ValueError("Coordinate, {0}, is not valid mutation "
+                                 "type".format(self.to_string()))
         else:
-            raise TypeError("Coordinate is not valid mutation type")
+            raise ValueError("Coordinate, {0}, is not valid coordinate "
+                             "system".format(self.to_string()))
         return one_based
 
-    def is_valid(self):
-        return self._valid_coord
+    def to_string(self):
+        return '{0}:{1}-{2}{3}>{4}'.format(self.chromosome, self.start,
+                                           self.stop, self.ref, self.var)
