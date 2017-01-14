@@ -48,4 +48,4 @@ def coordinate_system(input_string, convert_to_coordinate_system):
                   '\n\tMessage: {1}'.format(line_number, error))
             continue
         output_string += out + '\n'
-    return output_string.strip()
+    return output_string
