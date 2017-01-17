@@ -16,6 +16,7 @@ Python CLI to convert between zero and one based coordinate systems
 		conda config --add channels conda-forge 
 3. Use Anaconda to build the tool
 
+		cd convert_zero_one_based
 		conda build .
 4. Copy the filepath of the built package from the `conda build .` command. `/Users/<YOUR_USERNAME>/anaconda/conda-bld/osx-64/convert_zero_one_based-0.0.1-py35_0.tar.bz2` in the example below.
 
