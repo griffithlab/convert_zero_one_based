@@ -43,6 +43,11 @@ def coordinate_system(input_string, convert_to_coordinate_system):
                 out = '\t'.join([Coordinate(coord[0], coord[1], coord[2],
                                             coord[3], coord[4])
                                 .to_one_based()] + extra_cols)
+            else:
+                raise TypeError('\'{0}\' is not a valid argument. Please use '
+                                '\'to_zero_based\' or '
+                                '\'to_one_based\'.'.format(
+                    convert_to_coordinate_system))
         except ValueError as error:
             print('Coordinate Error in line {0} or input. Coordinate skipped.'
                   '\n\tMessage: {1}'.format(line_number, error))
