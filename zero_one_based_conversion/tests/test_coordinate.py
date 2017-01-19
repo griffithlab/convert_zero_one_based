@@ -140,14 +140,3 @@ class TestCoordinate(TestCase):
         self.assertEquals(coordinate.var, var)
         self.assertEquals(coordinate.coordinate_system, coordinate_system)
         self.assertEquals(coordinate.mutation_type, mutation_type)
-
-    def _assert_invalid_coordinate_match(self, coordinate, chrom, start, stop,
-                                         ref, var,
-                                         coordinate_system, mutation_type):
-        self.assertEquals(coordinate.chromosome, chrom)
-        self.assertEquals(coordinate.start, start)
-        self.assertEquals(coordinate.stop, stop)
-        self.assertEquals(coordinate.ref, ref)
-        self.assertEquals(coordinate.var, var)
-        self.assertEquals(coordinate.coordinate_system, coordinate_system)
-        self.assertEquals(coordinate.mutation_type, mutation_type)
