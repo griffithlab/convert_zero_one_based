@@ -27,6 +27,12 @@ class TestCoordinate(TestCase):
         cls.valid_zero_based_multideletion = Coordinate('7', '140534447',
                                                         '140534450',
                                                         'AGG', '-')
+        cls.invalid_mutation_type = Coordinate('7', '140534448', '140534448',
+                                               'A', 'T')
+        cls.invalid_mutation_type.mutation_type = 'invalid_type'
+        cls.invalid_coordinate_system = Coordinate('7', '140534448',
+                                                   '140534448', 'A', 'T')
+        cls.invalid_coordinate_system.coordinate_system = 28
 
     def test_coordinate_initialization(self):
         self._assert_valid_coordinate_match(self.valid_one_based_snv, '7',
@@ -101,6 +107,11 @@ class TestCoordinate(TestCase):
         self.assertEquals(self.valid_zero_based_multideletion.to_zero_based(),
                           '\t'.join(
                               ['7', '140534447', '140534450', 'AGG', '-']))
+        self.invalid_mutation_type.coordinate_system = 1
+        self.assertRaises(ValueError,
+                          self.invalid_mutation_type.to_zero_based)
+        self.assertRaises(ValueError,
+                          self.invalid_coordinate_system.to_zero_based)
 
     def test_to_one_based(self):
         self.assertEquals(self.valid_one_based_snv.to_one_based(),
@@ -129,6 +140,11 @@ class TestCoordinate(TestCase):
         self.assertEquals(self.valid_zero_based_multideletion.to_one_based(),
                           '\t'.join(
                               ['7', '140534448', '140534450', 'AGG', '-']))
+        self.invalid_mutation_type.coordinate_system = 0
+        self.assertRaises(ValueError,
+                          self.invalid_mutation_type.to_one_based)
+        self.assertRaises(ValueError,
+                          self.invalid_coordinate_system.to_one_based)
 
     def _assert_valid_coordinate_match(self, coordinate, chrom, start, stop,
                                        ref, var,
