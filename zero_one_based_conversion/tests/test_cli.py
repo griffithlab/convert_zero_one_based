@@ -9,7 +9,6 @@ class TestMain(TestCase):
         runner = CliRunner()
 
         version_result = runner.invoke(cli.main, ['--version'])
-        self.assertEquals(version_result.output, '0.0.1\n')
         self.assertEquals(version_result.exit_code, 0)
 
         with runner.isolated_filesystem():
