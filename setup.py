@@ -10,11 +10,11 @@ setup(
     author_email='b.ainscough@wustl.edu',
     license='MIT',
     classifiers=[
-        'Development Status :: 1 - Planning'
+        'Development Status :: 1 - Planning',
         'Intended Audience :: Developers',
         'Topic :: Utilities',
-        'License :: OSI Approved :: MIT License'
-        'Programming Language :: Python :: 3.5.2'
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.6'
     ],
     packages=find_packages()
 )
