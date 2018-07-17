@@ -34,5 +34,6 @@ test:
     - convert_zero_one_based --help
 
 about:
-  home: https://github.com/bainscou/convert_zero_one_based
+  home: https://github.com/griffithlab/convert_zero_one_based.git
   license: MIT
+  summary: Convert between zero and one based coordinate systems
