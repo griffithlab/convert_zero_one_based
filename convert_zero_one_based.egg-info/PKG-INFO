@@ -1,0 +1,14 @@
+Metadata-Version: 1.1
+Name: convert-zero-one-based
+Version: 0.0.1
+Summary: Convert between zero and one based coordinate systems and vice versa
+Home-page: https://github.com/bainscou/convert_zero_one_based
+Author: Ben Ainscough
+Author-email: b.ainscough@wustl.edu
+License: MIT
+Description-Content-Type: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - PlanningIntended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: MIT LicenseProgramming Language :: Python :: 3.5.2
