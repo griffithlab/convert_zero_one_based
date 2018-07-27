@@ -3,28 +3,31 @@
 # convert_zero_one_based
 Python CLI to convert between zero and one based coordinate systems
 
-# Install from bioconda (easiest)
+# Installation
 
 ## Install Anaconda
 
 1. You can find an installer to Anaconda [here](https://store.continuum.io/cshop/anaconda/) for your distribution (macOS, Linux, windows).
 2. Download the installer and follow the instructions.
-3. Add the bioconda channel
+
+## Install from bioconda (easiest)
+
+1. Add the bioconda channel
 		
 		conda config --add channels defaults
 		conda config --add channels conda-forge
 		conda config --add channels bioconda
 
-4. Install
+2. Install
 		
 		conda install convert_zero_one_based
 		
-5. Verify the install
+3. Verify the install
 
 		convert_zero_one_based --help
 
 
-# Build from source
+## Build from source
 
 1. Clone this repo
 
