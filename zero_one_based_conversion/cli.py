@@ -3,12 +3,6 @@ import pkg_resources
 import click
 
 from zero_one_based_conversion import convert
-# parser = argparse.ArgumentParser(
-#     description='convert_zero_one_based'
-# )
-# version = pkg_resources.get_distribution('convert_zero_one_based').version
-# parser.add_argument('-v', '--version', action='version', version=version)
-# parser.add_argument('-tb', '--to-base', choices=['zero', 'one'], )
 
 
 def print_version(ctx, param, value):
